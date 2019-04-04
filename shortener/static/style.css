@@ -4,8 +4,14 @@ body {
 
 #brand {
     font-family: Julius Sans One;
+    font-size: 1.5em;
+    color: white;
 }
 
 #url-field {
-    width: 80%;
+    width: 90%;
+}
+
+.nav-container {
+    background-color: 4663dc;
 }
