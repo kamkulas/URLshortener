@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    {{ absolute_path }}
+    <div class="inner-content">
+        <span class="bold">Your shortcut:</span>
+        <a href="{{ absolute_path }}">{{ absolute_path }}</a>
+    </div>
 {% endblock %}

@@ -1,31 +1,28 @@
 {% load static %}
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.png' %}"/>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.png' %}" />
     <link rel="stylesheet" href="{% static 'style.css' %}">
-    <link href="https://fonts.googleapis.com/css?family=Julius+Sans+One|Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Wire+One|Roboto" rel="stylesheet">
     <title>URL shortener.</title>
 </head>
-<body>
-    <nav class="navbar">
-        <nav class="container nav-container">
-            <div class="navbar-header ml-2 my-2">
-                <a class="navbar-brand" id="brand" href="{% url 'main_page' %}"><img src="{% static 'favicon.png' %}"> URL shortener</a>
-            </div>
-        </nav>
-    </nav>
 
-    <div class="container pt-3">
-        {% block content %}
-        {% endblock %}
-    </div>
-    <!-- jQuery and bootstrap -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-    <script src="{% static 'scripts.js' %}"></script>
+<body>
+    <main class="main-wrapper">
+        <nav class="navbar">
+            <a class="navbar-brand" href="{% url 'main_page' %}">
+                <img class="brand-icon" src="{% static 'favicon.png' %}">URL shortener
+            </a>
+        </nav>
+
+        <div class="content">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </main>
 </body>
+
 </html>

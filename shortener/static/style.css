@@ -1,17 +1,100 @@
 body {
+    height: 100%;
+    margin: 0;
+    background-color: #eeeeee;
+}
+
+body,
+.main-wrapper,
+.navbar-brand,
+.content,
+.inner-content {
+    display: flex;
+}
+
+body,
+.content {
+    justify-content: center;
+}
+
+body,
+.navbar-brand,
+.content,
+.inner-content {
+    align-items: center;
+}
+
+.main-wrapper {
+    width: 100%;
+    max-width: 700px;
+    height: 100%;
+    max-height: 350px;
+    margin: auto;
     font-family: Roboto;
+    background-color: white;
+    box-shadow: 4px 4px 12px 0 darkgray;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    overflow: hidden;
+    flex-direction: column;
 }
 
-#brand {
-    font-family: Julius Sans One;
-    font-size: 1.5em;
+.submit-button {
+    border: none;
+    margin-top: 8px;
+    background-color: #4663dc;
     color: white;
+    width: 200px;
+    height: 40px;
+    font-family: inherit;
+    font-size: 1em;
+    transition: background-color 0.5s;
 }
 
-#url-field {
+.submit-button:hover {
+    background-color: #384fb0;
+}
+
+.navbar-brand {
+    font-family: Wire One;
+    text-decoration: none;
+    font-size: 4em;
+    color: white;
+    min-height: inherit;
+}
+
+.brand-icon {
+    margin-right: 7px;
+}
+
+.url-field {
     width: 90%;
 }
 
-.nav-container {
-    background-color: 4663dc;
+.navbar {
+    min-height: 100px;
+    padding: 10px 10px 10px 30px;
+    background-color: #4663dc;
+}
+
+.content,
+.content > form {
+    flex: 1;
+}
+
+.inner-content {
+    flex-direction: column;
+}
+
+.bold {
+    font-size: 1.2em;
+}
+
+.inner-content > a {
+    text-decoration: none;
+    background-color: #eeeeee;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid darkgray;
+    color: #4663dc;
 }

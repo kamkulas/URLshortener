@@ -16,12 +16,19 @@ def index(request):
             original_url = clean_data['url']
             hasher = sha1(original_url.encode())
             next_id = len(URL.objects.all()) + 1
-            url_hash = str(next_id) + '_' + urlsafe_b64encode(hasher.digest())[:10-len(str(next_id))].decode()
-            shortened_url, created = URL.objects.get_or_create(original_path=original_url,
-                                                               defaults={'shortcut': url_hash})
+            url_hash = str(next_id) + '_' + urlsafe_b64encode(
+                hasher.digest())[:10-len(str(next_id))].decode()
+            shortened_url, created = URL.objects.get_or_create(
+                original_path=original_url,
+                defaults={'shortcut': url_hash}
+            )
             if not created:
                 url_hash = shortened_url.shortcut
-            return render(request, 'result.html', {'absolute_path': request.build_absolute_uri(url_hash)})
+            return render(
+                request,
+                'result.html',
+                {'absolute_path': request.build_absolute_uri(url_hash)}
+            )
         else:
             message = 'Form is not valid. Try again.'
             return render(request, 'error.html', {'error': message})
@@ -35,4 +42,10 @@ def shortcut(request, short_url):
         original_url = URL.objects.get(shortcut=short_url).original_path
         return redirect(original_url)
     except ObjectDoesNotExist:
-        return render(request, 'error.html', {'error': 'There is no such shortcut.'})
+        response = render(
+            request,
+            'error.html',
+            {'error': 'Shortcut not found.'}
+        )
+        response.status_code = 404
+        return response
