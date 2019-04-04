@@ -2,5 +2,5 @@ from django.db import models
 
 
 class URL(models.Model):
-    full_path = models.URLField()
-    shortcut = models.CharField(max_length=255)
+    original_path = models.URLField(unique=True)
+    shortcut = models.URLField(unique=True)
