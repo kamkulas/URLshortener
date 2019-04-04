@@ -15,18 +15,17 @@ def index(request):
             clean_data = form.cleaned_data
             original_url = clean_data['url']
             hasher = sha1(original_url.encode())
-            try:
-                next_id = URL.objects.latest('id').id + 1
-            except ObjectDoesNotExist:
-                next_id = 1
-            url_hash = urlsafe_b64encode(hasher.digest())[:10-len(str(next_id))].decode() + str(next_id)
-            shortened_url, _ = URL.objects.get_or_create(original_path=original_url, defaults={'shortcut': url_hash})
+            next_id = len(URL.objects.all()) + 1
+            url_hash = str(next_id) + '_' + urlsafe_b64encode(hasher.digest())[:10-len(str(next_id))].decode()
+            shortened_url, created = URL.objects.get_or_create(original_path=original_url,
+                                                               defaults={'shortcut': url_hash})
+            if not created:
+                url_hash = shortened_url.shortcut
             return render(request, 'result.html', {'absolute_path': request.build_absolute_uri(url_hash)})
         else:
             message = 'Form is not valid. Try again.'
             return render(request, 'error.html', {'error': message})
     else:
-        print('--------->', reverse('main_page'))
         form = URLForm()
         return render(request, 'index.html', {'form': form})
 
