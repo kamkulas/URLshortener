@@ -67,10 +67,6 @@ body,
     margin-right: 7px;
 }
 
-.url-field {
-    width: 90%;
-}
-
 .navbar {
     min-height: 100px;
     padding: 10px 10px 10px 30px;
@@ -97,4 +93,12 @@ body,
     margin-top: 10px;
     border: 1px solid darkgray;
     color: #4663dc;
+}
+
+.url-field {
+    font-family: inherit;
+    width: 85%;
+    height: 40px;
+    border: 1px solid #03a9f4;
+    padding-left: 10px;
 }
