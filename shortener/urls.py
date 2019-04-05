@@ -1,3 +1,7 @@
+"""
+File storing paths used in shortener application.
+"""
+
 from django.urls import path
 
 from . import views
