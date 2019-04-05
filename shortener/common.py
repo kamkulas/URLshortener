@@ -19,5 +19,5 @@ def generate_url_shortcut(text):
     hasher = sha1(text.encode())
     next_id = len(URL.objects.all()) + 1
     url_hash = str(next_id) + '_' + urlsafe_b64encode(
-        hasher.digest())[:10 - len(str(next_id))].decode()
+        hasher.digest())[:10].decode()
     return url_hash
