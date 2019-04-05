@@ -1,23 +1,29 @@
-from hashlib import sha1
-from base64 import urlsafe_b64encode
-
 from django.shortcuts import render, redirect, reverse
 from django.core.exceptions import ObjectDoesNotExist
 
 from .forms import URLForm
 from .models import URL
+from .common import generate_url_shortcut
 
 
 def index(request):
+    """
+    Main page view.
+    If received request was GET type, there is a form shown.
+    If received request was POST type, there are two possibilities:
+        - if form was filled out correctly, the result will be rendered
+          as an output.
+        - if form was invalid, there will be an error shown.
+    :param request: received request.
+    :return: rendered page, depending on taken action.
+    """
+
     if request.method == 'POST':
         form = URLForm(request.POST)
         if form.is_valid():
             clean_data = form.cleaned_data
             original_url = clean_data['url']
-            hasher = sha1(original_url.encode())
-            next_id = len(URL.objects.all()) + 1
-            url_hash = str(next_id) + '_' + urlsafe_b64encode(
-                hasher.digest())[:10-len(str(next_id))].decode()
+            url_hash = generate_url_shortcut(original_url)
             shortened_url, created = URL.objects.get_or_create(
                 original_path=original_url,
                 defaults={'shortcut': url_hash}
@@ -38,6 +44,14 @@ def index(request):
 
 
 def shortcut(request, short_url):
+    """
+    View used for redirecting to the desired webpage. In case of incorrect
+    shortcut (when it doesn't exist in the database), 404 code is returned.
+    :param request: received request.
+    :param short_url: shortcut passed by URL.
+    :return: redirect to the original site or error response.
+    """
+
     try:
         original_url = URL.objects.get(shortcut=short_url).original_path
         return redirect(original_url)
